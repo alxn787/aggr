@@ -2,6 +2,14 @@
 
 A real-time meme coin data aggregation service that fetches data from multiple DEX sources, provides caching, filtering, sorting, and real-time WebSocket updates.
 
+## 🚀 Live Demo
+
+**Server IP**: `174.138.122.28`
+
+- **REST API**: `http://174.138.122.28:3000`
+- **WebSocket**: `ws://174.138.122.28:8080`
+- **Health Check**: `http://174.138.122.28:3000/health`
+
 ## Features
 
 - **Multi-DEX Integration**: Fetches data from DexScreener and Jupiter Search APIs

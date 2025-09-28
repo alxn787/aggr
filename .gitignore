@@ -108,6 +108,4 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Exclude specific files
-worker/wss.ts
-worker/redis.ts
+
