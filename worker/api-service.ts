@@ -94,7 +94,7 @@ export class ApiService {
 
     constructor() {
         this.rateLimiters.set('dexscreener', new RateLimiter(300, 60000));
-        this.rateLimiters.set('jupiter', new RateLimiter(200, 60000));
+        this.rateLimiters.set('jupiter', new RateLimiter(100, 60000));
     }
 
     private async makeRequestWithRetry<T>(

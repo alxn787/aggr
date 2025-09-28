@@ -1,0 +1,331 @@
+{
+  "info": {
+    "name": "MemeCoin Aggregator API",
+    "description": "Complete API collection for testing the real-time data aggregation service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "wsUrl",
+      "value": "ws://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Tokens (Default)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens with Pagination",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?limit=5&cursor=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "5"
+            },
+            {
+              "key": "cursor",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Sort by Volume",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?sortField=volume24h&sortDirection=desc&limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "sortField",
+              "value": "volume24h"
+            },
+            {
+              "key": "sortDirection",
+              "value": "desc"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Sort by Price Change",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?sortField=priceChange24h&sortDirection=desc&limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "sortField",
+              "value": "priceChange24h"
+            },
+            {
+              "key": "sortDirection",
+              "value": "desc"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Filter by Volume",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?minVolume=1000000&maxVolume=10000000",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "minVolume",
+              "value": "1000000"
+            },
+            {
+              "key": "maxVolume",
+              "value": "10000000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Filter by Price Change",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?minPriceChange=10&maxPriceChange=100",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "minPriceChange",
+              "value": "10"
+            },
+            {
+              "key": "maxPriceChange",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Filter by DEX",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?dexIds=raydium,orca",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "dexIds",
+              "value": "raydium,orca"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Tokens - Filter by Symbol",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?symbols=SOL,MRBEAST",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "symbols",
+              "value": "SOL,MRBEAST"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Specific Token by Address",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens/So11111111111111111111111111111111111111112",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens", "So11111111111111111111111111111111111111112"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get MRBEAST Token by Address",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens/G1DXVVmqJs8Ei79QbK41dpgk2WtXSGqLtx9of7o8BAGS",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens", "G1DXVVmqJs8Ei79QbK41dpgk2WtXSGqLtx9of7o8BAGS"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Refresh Token Data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/refresh",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "refresh"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get WebSocket Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/websocket",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "websocket"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Complex Query - High Volume Tokens",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?minVolume=10000000&sortField=volume24h&sortDirection=desc&limit=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "minVolume",
+              "value": "10000000"
+            },
+            {
+              "key": "sortField",
+              "value": "volume24h"
+            },
+            {
+              "key": "sortDirection",
+              "value": "desc"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Complex Query - Price Gainers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/tokens?minPriceChange=50&sortField=priceChange24h&sortDirection=desc&limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tokens"],
+          "query": [
+            {
+              "key": "minPriceChange",
+              "value": "50"
+            },
+            {
+              "key": "sortField",
+              "value": "priceChange24h"
+            },
+            {
+              "key": "sortDirection",
+              "value": "desc"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
