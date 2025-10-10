@@ -1,6 +1,7 @@
 export const config = {
     server: {
         port: parseInt(process.env.PORT || '3000'),
+        host: process.env.HOST || '0.0.0.0',
         nodeEnv: process.env.NODE_ENV || 'development',
     },
     redis: {
@@ -22,5 +23,6 @@ export const config = {
         },
     websocket: {
         port: parseInt(process.env.WS_PORT || '8080'),
+        host: process.env.WS_HOST || '0.0.0.0',
     },
 };

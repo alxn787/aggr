@@ -1,6 +1,7 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { RedisService } from "./redis";
 import { DataService, type FilterOptions, type SortOptions, type PaginationOptions } from "./data-service";
+import { config } from "./config";
 
 interface ClientConnection extends WebSocket {
     id: string;
@@ -15,10 +16,10 @@ export class WSS {
     private dataService: DataService;
     private clients: Map<string, ClientConnection> = new Map();
 
-    constructor(redis: RedisService, dataService: DataService, port: number = 8080) {
+    constructor(redis: RedisService, dataService: DataService, port: number = config.websocket.port) {
         this.redis = redis;
         this.dataService = dataService;
-        this.wss = new WebSocketServer({ port });
+        this.wss = new WebSocketServer({ port, host: config.websocket.host });
 
         this.wss.on("connection", (ws: WebSocket) => {
             const clientId = this.generateClientId();
@@ -55,7 +56,7 @@ export class WSS {
             this.broadcastUpdate(update);
         });
 
-        console.log(`WebSocket server running on ws://localhost:${port}`);
+        console.log(`WebSocket server running on ws://${config.websocket.host}:${port}`);
     }
 
     private generateClientId(): string {

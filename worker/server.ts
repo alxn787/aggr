@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { RedisService } from './redis';
 import { DataService, type FilterOptions, type SortOptions, type PaginationOptions } from './data-service';
+import { ApiService } from './api-service';
 import { WSS } from './wss';
 import { config } from './config';
 
@@ -20,8 +21,8 @@ export class Server {
         
         // Initialize services
         this.redis = new RedisService();
-        this.dataService = new DataService(this.redis, new (require('./api-service').ApiService)());
-        this.wss = new WSS(this.redis, this.dataService, 8080);
+        this.dataService = new DataService(this.redis, new ApiService());
+        this.wss = new WSS(this.redis, this.dataService, config.websocket.port);
         
         this.setupMiddleware();
         this.setupRoutes();
@@ -148,7 +149,7 @@ export class Server {
             res.json({
                 success: true,
                 data: {
-                    url: `ws://localhost:8080`,
+                    url: `ws://${config.websocket.host}:${config.websocket.port}`,
                     connectedClients: this.wss.getConnectedClientsCount(),
                     messageTypes: [
                         'subscribe',
@@ -183,11 +184,11 @@ export class Server {
         try {
             await this.dataService.startPeriodicRefresh(config.cache.refreshIntervalMs);
 
-            this.app.listen(this.port, () => {
-                console.log(`Server running on http://localhost:${this.port}`);
-                console.log(`WebSocket server running on ws://localhost:8080`);
-                console.log(`Health check: http://localhost:${this.port}/health`);
-                console.log(`API docs: http://localhost:${this.port}/api/tokens`);
+            this.app.listen(this.port, config.server.host, () => {
+                console.log(`Server running on http://${config.server.host}:${this.port}`);
+                console.log(`WebSocket server running on ws://${config.websocket.host}:${config.websocket.port}`);
+                console.log(`Health check: http://${config.server.host}:${this.port}/health`);
+                console.log(`API docs: http://${config.server.host}:${this.port}/api/tokens`);
             });
         } catch (error) {
             console.error('Failed to start server:', error);
